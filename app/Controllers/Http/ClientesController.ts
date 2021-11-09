@@ -10,7 +10,7 @@ export default class ClientesController {
     try {
       const data = request.only(['nome', 'cpfcnpj', 'endereco', 'bairro', 'numero', 'cidade', 'uf', 'dataNasc', 'obs'])
       const cliente = await Cliente.create(data)
-      console.log("chegou")
+      console.log(cliente)
       return cliente
     } catch (error) {
       console.log(error)
