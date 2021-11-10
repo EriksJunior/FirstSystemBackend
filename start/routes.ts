@@ -20,7 +20,9 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.resource('/cliente', 'ClientesController').apiOnly()
+Route.post('/cliente', 'ClientesController.store')
+Route.get('/cliente', 'ClientesController.index')
+
 
 
 

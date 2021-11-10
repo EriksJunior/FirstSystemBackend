@@ -3,6 +3,13 @@ import Cliente from '../../Models/Cliente'
 
 export default class ClientesController {
   public async index({ }: HttpContextContract) {
+    try {
+      const data = await Cliente.all()
+      console.log(data)
+      return data
+    } catch (error) {
+      console.log(error)
+    }
   }
 
 
