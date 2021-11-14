@@ -22,9 +22,8 @@ import Route from '@ioc:Adonis/Core/Route'
 
 Route.post('/cliente', 'ClientesController.store')
 Route.get('/cliente', 'ClientesController.index')
+Route.delete('/cliente/:id', 'ClientesController.destroy')
+Route.get('/cliente/:id', 'ClientesController.buscarCliente')
 
 
 
-
-// viu que no terminal mandei lista as rotas
-// e vc uso só o resource não fez nenhum más ele ligo

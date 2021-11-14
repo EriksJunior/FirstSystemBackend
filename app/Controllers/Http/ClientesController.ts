@@ -12,6 +12,16 @@ export default class ClientesController {
     }
   }
 
+  public async buscarCliente({ params }: HttpContextContract) {
+    try {
+      const data = await Cliente.find(`${params.id}`)
+      return data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
 
   public async store({ request }: HttpContextContract) {
     try {
@@ -30,7 +40,10 @@ export default class ClientesController {
   public async update({ }: HttpContextContract) {
   }
 
-  public async destroy({ }: HttpContextContract) {
+  public async destroy({ params }: HttpContextContract) {
+    const data = await Cliente.findOrFail(params.id)
+
+    await data.delete()
   }
 
 }
