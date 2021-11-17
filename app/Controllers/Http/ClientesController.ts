@@ -5,7 +5,6 @@ export default class ClientesController {
   public async index({ }: HttpContextContract) {
     try {
       const data = await Cliente.all()
-      console.log(data)
       return data
     } catch (error) {
       console.log(error)
@@ -27,7 +26,6 @@ export default class ClientesController {
     try {
       const data = request.only(['nome', 'cpfcnpj', 'endereco', 'bairro', 'numero', 'cidade', 'uf', 'dataNasc', 'obs'])
       const cliente = await Cliente.create(data)
-      console.log(cliente)
       return cliente
     } catch (error) {
       console.log(error)
@@ -37,13 +35,27 @@ export default class ClientesController {
   public async show({ }: HttpContextContract) {
   }
 
-  public async update({ }: HttpContextContract) {
+  public async update({ request, params }: HttpContextContract) {
+    try {
+      const data = await Cliente.findOrFail(params.id)
+      const cliente = request.only(['nome', 'cpfcnpj', 'endereco', 'bairro', 'numero', 'cidade', 'uf', 'dataNasc', 'obs'])
+      data.merge(cliente)
+      await data.save()
+      return data
+
+    } catch (error) {
+      console.log(error)
+    }
+
   }
 
   public async destroy({ params }: HttpContextContract) {
-    const data = await Cliente.findOrFail(params.id)
-
-    await data.delete()
+    try {
+      const data = await Cliente.findOrFail(params.id)
+      await data.delete()
+    } catch (error) {
+      console.log(error)
+    }
   }
 
 }
