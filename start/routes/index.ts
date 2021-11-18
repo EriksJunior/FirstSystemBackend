@@ -1,0 +1,2 @@
+import './cliente';
+import './produto';

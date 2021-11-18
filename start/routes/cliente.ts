@@ -28,3 +28,4 @@ Route.put('/cliente/:id', 'ClientesController.update')
 
 
 
+export default Route

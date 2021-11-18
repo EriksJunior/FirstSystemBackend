@@ -11,16 +11,14 @@ export default class ProdutosController {
     }
   }
 
-  public async create({ }: HttpContextContract) {
-  }
-
-  public async store({ }: HttpContextContract) {
+  public async store({ request }: HttpContextContract) {
+    const dadosProdutos = request.only(['nome', 'marca', 'quantidade', 'preco_custo', 'preco_venda', 'categoria', 'data_cadastro', 'obs'])
+    const data = await Produto.create(dadosProdutos)
+    console.log(data)
+    return data
   }
 
   public async show({ }: HttpContextContract) {
-  }
-
-  public async edit({ }: HttpContextContract) {
   }
 
   public async update({ }: HttpContextContract) {
