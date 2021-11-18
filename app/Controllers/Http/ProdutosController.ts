@@ -11,11 +11,16 @@ export default class ProdutosController {
     }
   }
 
-  public async store({ request }: HttpContextContract) {
-    const dadosProdutos = request.only(['nome', 'marca', 'quantidade', 'preco_custo', 'preco_venda', 'categoria', 'data_cadastro', 'obs'])
-    const data = await Produto.create(dadosProdutos)
-    console.log(data)
-    return data
+  public async store({ request, response }: HttpContextContract) {
+    try {
+      const dadosProdutos = request.only(['nome', 'marca', 'quantidade', 'preco_custo', 'preco_venda', 'categoria', 'data_cadastro', 'obs'])
+      const data = await Produto.create(dadosProdutos)
+      response.status(200).json({ message: 'Cliente salvo com sucesso!' })
+      console.log(data)
+      return data
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   public async show({ }: HttpContextContract) {
