@@ -21,6 +21,8 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.post('/produto', 'ProdutosController.store')
+Route.get('/produto', 'ProdutosController.index')
+
 
 
 
