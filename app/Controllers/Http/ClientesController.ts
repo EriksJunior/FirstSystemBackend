@@ -14,6 +14,7 @@ export default class ClientesController {
   public async buscarCliente({ params }: HttpContextContract) {
     try {
       const data = await Cliente.find(`${params.id}`)
+      console.log(data)
       return data
     } catch (error) {
       console.log(error)
@@ -24,8 +25,9 @@ export default class ClientesController {
 
   public async store({ request }: HttpContextContract) {
     try {
-      const data = request.only(['nome', 'cpfcnpj', 'endereco', 'bairro', 'numero', 'cidade', 'uf', 'dataNasc', 'obs'])
+      const data = request.only(['nome', 'cpfcnpj', 'endereco', 'bairro', 'numero', 'cidade', 'uf', 'dataNasc', 'data_nasc', 'obs'])
       const cliente = await Cliente.create(data)
+      console.log(data)
       return cliente
     } catch (error) {
       console.log(error)

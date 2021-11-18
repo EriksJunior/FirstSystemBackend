@@ -23,7 +23,9 @@ export default class ProdutosController {
     }
   }
 
-  public async show({ }: HttpContextContract) {
+  public async show({ params }: HttpContextContract) {
+    const dadosProdutos = await Produto.findOrFail(params.id)
+    return dadosProdutos
   }
 
   public async update({ }: HttpContextContract) {
