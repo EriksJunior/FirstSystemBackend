@@ -5,7 +5,7 @@ export default class Produtos extends BaseSchema {
 
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id').unique().defaultTo(null)
+      table.increments('id').primary().unique().defaultTo(null)
       table.string('nome', 100).notNullable().defaultTo(null)
       table.string('marca', 50).defaultTo(null)
       table.integer('quantidade', 10).defaultTo(null)
