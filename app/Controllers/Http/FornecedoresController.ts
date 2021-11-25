@@ -12,7 +12,8 @@ export default class FornecedoresController {
     }
   }
 
-  public async store({ }: HttpContextContract) {
+  public async store({ request, response }: HttpContextContract) {
+    const salvarDadosFornecedor = request.only(['razaoSocial', 'nomeFantasia', 'endereco', 'bairro', 'numero', 'cidade', 'uf', 'cnpj', 'ie', 'telefone'])
   }
 
   public async show({ }: HttpContextContract) {
