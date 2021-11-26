@@ -12,8 +12,11 @@ export default class FornecedoresController {
     }
   }
 
-  public async store({ request, response }: HttpContextContract) {
-    const salvarDadosFornecedor = request.only(['razaoSocial', 'nomeFantasia', 'endereco', 'bairro', 'numero', 'cidade', 'uf', 'cnpj', 'ie', 'telefone'])
+  public async store({ request }: HttpContextContract) {
+    const pegarDadosFornecedor = await request.only(['razao_social', 'nome_fantasia', 'endereco', 'bairro', 'numero', 'cidade', 'uf', 'cnpj', 'ie', 'telefone'])
+    const saveFornecedor = await Fornecedor.create(pegarDadosFornecedor)
+
+    return saveFornecedor
   }
 
   public async show({ }: HttpContextContract) {
