@@ -40,6 +40,7 @@ export default class FornecedoresController {
 
     idFornecedor.merge(dadosFornecedor)
     await idFornecedor.save();
+    return idFornecedor
 
   }
 
