@@ -10,6 +10,7 @@ export default class MovEstoques extends BaseSchema {
       table.integer('id_fornecedor').unsigned().references('id').inTable('fornecedors').onUpdate('CASCADE').notNullable()
       table.integer('quantidade', 10).notNullable()
       table.integer('numero_nfe', 10).notNullable()
+      table.string('tipo_movimentacao', 100).notNullable()
       table.timestamps(true)
     })
   }
