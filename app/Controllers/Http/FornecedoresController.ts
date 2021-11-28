@@ -44,6 +44,7 @@ export default class FornecedoresController {
 
   }
 
-  public async destroy({ }: HttpContextContract) {
+  public async destroy({params }: HttpContextContract) {
+    const idFornecedor = await Fornecedor.
   }
 }
