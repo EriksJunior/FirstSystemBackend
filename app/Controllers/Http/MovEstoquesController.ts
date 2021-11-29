@@ -13,7 +13,7 @@ export default class MovEstoquesController {
   }
   public async store({ request }: HttpContextContract) {
     try {
-      const dadosMovimentacaoEstoque = await request.only(['id_produto', 'id_fornecedor', 'quantidade', 'numero_nfe', 'tipo_movimentacao'])
+      const dadosMovimentacaoEstoque = await request.only(['id_produto', 'id_fornecedor', 'quantidade', 'numero_nfe', 'tipo_movimentacao', 'nome_fornecedor'])
       const data = await MovEstoque.create(dadosMovimentacaoEstoque);
       console.log(data)
       return data
