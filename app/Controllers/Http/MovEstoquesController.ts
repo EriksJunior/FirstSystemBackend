@@ -4,7 +4,7 @@ import MovEstoque from '../../Models/MovEstoque'
 export default class MovEstoquesController {
   public async index({ }: HttpContextContract) {
     try {
-      const data = MovEstoque.all();
+      const data = await MovEstoque.all();
       console.log(data)
       return data
     } catch (error) {
