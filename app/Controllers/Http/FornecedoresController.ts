@@ -1,6 +1,5 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Fornecedor from 'App/Models/Fornecedor'
-import databaseConfig from 'Config/database';
 
 export default class FornecedoresController {
   public async index({ }: HttpContextContract) {
@@ -44,7 +43,13 @@ export default class FornecedoresController {
 
   }
 
-  public async destroy({params }: HttpContextContract) {
-    const idFornecedor = await Fornecedor.
+  public async destroy({ params, response }: HttpContextContract) {
+    try {
+      const data = await Fornecedor.findOrFail(params.id)
+      data.delete()
+      return response.status(200).json({ message: "Fornecedor deletedo com sucesso!" })
+    } catch (error) {
+
+    }
   }
 }

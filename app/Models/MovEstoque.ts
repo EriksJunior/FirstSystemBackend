@@ -14,7 +14,7 @@ export default class MovEstoque extends BaseModel {
 
   @column()
   public id_fornecedor: number
-  @belongsTo(() => Fornecedor, { foreignKey: 'id_fornecedor' }),
+  @belongsTo(() => Fornecedor, { foreignKey: 'id_fornecedor' })
   public fornecedor: BelongsTo<typeof Fornecedor>
 
   @column()
