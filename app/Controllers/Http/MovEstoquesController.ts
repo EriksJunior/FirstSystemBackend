@@ -11,11 +11,15 @@ export default class MovEstoquesController {
       console.log(error)
     }
   }
-
-  public async create({ }: HttpContextContract) {
-  }
-
-  public async store({ }: HttpContextContract) {
+  public async store({ request }: HttpContextContract) {
+    try {
+      const dadosMovimentacaoEstoque = await request.only(['id_produto', 'id_fornecedor', 'quantidade', 'numero_nfe', 'tipo_movimentacao'])
+      const data = await MovEstoque.create(dadosMovimentacaoEstoque);
+      console.log(data)
+      return data
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   public async show({ }: HttpContextContract) {
