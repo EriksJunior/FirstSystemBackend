@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
-import Produto from 'app/Models/Produto'
-import Fornecedor from 'app/Models/Fornecedor'
+import Produto from '../Models/Produto'
+import Fornecedor from '../Models/Fornecedor'
 
 export default class MovEstoque extends BaseModel {
   @column({ isPrimary: true })

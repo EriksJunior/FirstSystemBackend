@@ -11,7 +11,6 @@ export default class MovEstoques extends BaseSchema {
       table.integer('quantidade', 10).notNullable()
       table.integer('numero_nfe', 10).notNullable()
       table.string('tipo_movimentacao', 100).notNullable()
-      table.string('nome_fornecedor', 100)
       table.timestamps(true)
     })
   }
