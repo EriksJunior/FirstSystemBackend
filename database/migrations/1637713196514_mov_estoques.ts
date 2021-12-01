@@ -7,7 +7,7 @@ export default class MovEstoques extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary().unique()
       table.integer('id_produto').unsigned().references('id').inTable('produtos').onUpdate('CASCADE').notNullable()
-      table.integer('id_fornecedor').unsigned().references('id').inTable('fornecedors').onUpdate('CASCADE').notNullable()
+      table.integer('id_fornecedor').unsigned().references('id').inTable('fornecedors').onUpdate('CASCADE')
       table.integer('quantidade', 10).notNullable()
       table.integer('numero_nfe', 10).notNullable()
       table.string('tipo_movimentacao', 100).notNullable()
