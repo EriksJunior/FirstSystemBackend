@@ -11,6 +11,16 @@ export default class MovEstoquesController {
       console.log(error)
     }
   }
+
+  public async selectMovInventoryById({ params }: HttpContextContract) {
+    try {
+      const stockMovementById = await MovEstoque.findOrFail(params.id)
+      return stockMovementById;
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   public async store({ request }: HttpContextContract) {
     const dadosMovimentacaoEstoque = await request.only(['id_produto', 'id_fornecedor', 'quantidade', 'numero_nfe', 'tipo_movimentacao'])
     const data = await MovEstoque.create(dadosMovimentacaoEstoque);
