@@ -4,7 +4,7 @@ import MovEstoque from '../../Models/MovEstoque'
 export default class MovEstoquesController {
   public async index({ }: HttpContextContract) {
     try {
-      const data = await MovEstoque.all();
+      const data = await MovEstoque.query().preload("fornecedor").preload("produto");
       console.log(data)
       return data
     } catch (error) {
@@ -25,9 +25,25 @@ export default class MovEstoquesController {
   public async edit({ }: HttpContextContract) {
   }
 
-  public async update({ }: HttpContextContract) {
+  public async update({ request, params, response }: HttpContextContract) {
+    const dataMovEstoque = await MovEstoque.findOrFail(params.is)
+    const data = request.only(["id_produto", "id_fornecedor", "quantidade", "numero_nfe", "tipo_movimentacao"])
+
+    dataMovEstoque.merge(data)
+    await dataMovEstoque.save()
+
+    response.status(200).json({ message: "Movimentação atualizada com sucesso!" })
+    return dataMovEstoque
   }
 
-  public async destroy({ }: HttpContextContract) {
+  public async destroy({ params, response }: HttpContextContract) {
+    try {
+      const id = await MovEstoque.findOrFail(params.id)
+      id.delete();
+      response.status(200).json({ message: 'Produto deletado com sucesso!' })
+    } catch (error) {
+      console.log(error)
+    }
+
   }
 }
