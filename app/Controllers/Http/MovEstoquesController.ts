@@ -36,14 +36,13 @@ export default class MovEstoquesController {
   }
 
   public async update({ request, params, response }: HttpContextContract) {
-    const dataMovEstoque = await MovEstoque.findOrFail(params.is)
+    const dataMovEstoque = await MovEstoque.findOrFail(params.id)
     const data = request.only(["id_produto", "id_fornecedor", "quantidade", "numero_nfe", "tipo_movimentacao"])
-
     dataMovEstoque.merge(data)
     await dataMovEstoque.save()
 
     response.status(200).json({ message: "Movimentação atualizada com sucesso!" })
-    return dataMovEstoque
+    return data
   }
 
   public async destroy({ params, response }: HttpContextContract) {
