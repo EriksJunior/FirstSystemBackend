@@ -5,7 +5,6 @@ export default class MovEstoquesController {
   public async index({ }: HttpContextContract) {
     try {
       const data = await MovEstoque.query().preload("fornecedor").preload("produto");
-      console.log(data)
       return data
     } catch (error) {
       console.log(error)
@@ -22,11 +21,15 @@ export default class MovEstoquesController {
   }
 
   public async store({ request }: HttpContextContract) {
-    const dadosMovimentacaoEstoque = await request.only(['id_produto', 'id_fornecedor', 'quantidade', 'numero_nfe', 'tipo_movimentacao'])
-    
-    const data = await MovEstoque.create(dadosMovimentacaoEstoque);
-    console.log(data)
-    return data
+    try {
+      const dadosMovimentacaoEstoque = await request.only(['id_produto', 'id_fornecedor', 'quantidade', 'numero_nfe', 'tipo_movimentacao'])
+      const data = await MovEstoque.create(dadosMovimentacaoEstoque);
+      const teste = await MovEstoque.query().select(['numero_nfe']).where(['numero_nfe', '=', dadosMovimentacaoEstoque.numero_nfe])
+      console.log(teste)
+      return data
+    } catch (error) {
+      console.log(error)
+    }
 
   }
 
