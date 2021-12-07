@@ -23,6 +23,7 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.post('/produto', 'ProdutosController.store')
 Route.get('/produto', 'ProdutosController.index')
 Route.get('/produto/:id', 'ProdutosController.show')
+Route.get('/produto/quantEstoque/:id', 'ProdutosController.show')
 Route.put('/produto/:id', 'ProdutosController.update')
 Route.delete('/produto/:id', 'ProdutosController.destroy')
 

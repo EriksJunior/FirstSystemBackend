@@ -11,9 +11,19 @@ export default class ProdutosController {
     }
   }
 
+  public async quantTotalProdEstoque({ params }: HttpContextContract) {
+    try {
+      const quantidadeTotalEstoque = await Produto.firstOrFail(params.id)
+      const data = await Produto.query; //INACABADO
+      return quantidadeTotalEstoque
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   public async store({ request, response }: HttpContextContract) {
     try {
-      const dadosProdutos = request.only(['nome', 'marca', 'quantidade', 'preco_custo', 'preco_venda', 'categoria', 'data_cadastro', 'obs'])
+      const dadosProdutos = request.only(['nome', 'marca', 'preco_custo', 'preco_venda', 'categoria', 'data_cadastro', 'obs'])
       const data = await Produto.create(dadosProdutos)
       response.status(200).json({ message: 'Produto salvo com sucesso!' })
       console.log(data)

@@ -8,7 +8,6 @@ export default class Produtos extends BaseSchema {
       table.increments('id').primary().unique().defaultTo(null)
       table.string('nome', 100).notNullable().defaultTo(null)
       table.string('marca', 50).defaultTo(null)
-      table.integer('quantidade', 10).defaultTo(null)
       table.decimal('preco_custo', 15.3).defaultTo(null)
       table.decimal('preco_venda', 15.3).defaultTo(null)
       table.string('categoria', 50).defaultTo(null)
