@@ -25,7 +25,7 @@ export default class MovEstoquesController {
     try {
       const dadosMovimentacaoEstoque = await request.only(['id_produto', 'id_fornecedor', 'quantidade', 'numero_nfe', 'tipo_movimentacao'])
       const data = await MovEstoque.create(dadosMovimentacaoEstoque);
-      const quantProdutos = await Database.rawQuery(`select sum(quantidade) from mov_estoques where id_produto = ${dadosMovimentacaoEstoque.id_produto}`)
+      const quantProdutos = await Database.rawQuery(`select sum(quantidade) as quantidadeTotal from mov_estoques where id_produto = ${dadosMovimentacaoEstoque.id_produto}`)
       console.log(quantProdutos)
       return data
     } catch (error) {
