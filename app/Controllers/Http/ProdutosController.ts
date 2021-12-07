@@ -1,5 +1,6 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Produto from '../../Models/Produto'
+import Database from '@ioc:Adonis/Lucid/Database'
 
 export default class ProdutosController {
   public async index({ }: HttpContextContract) {
@@ -28,6 +29,16 @@ export default class ProdutosController {
       response.status(200).json({ message: 'Produto salvo com sucesso!' })
       console.log(data)
       return data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  public async selectAmountProductById({ params, request }: HttpContextContract) {
+    try {
+      const amountProductMovementById = await Produto.findOrFail(params.id)
+      const amountTotalProduct = await Database.rawQuery(`select sum(mov_estoques.quantidade) as quantidadeTotal from mov_estoques inner join produtos where ${params.id}`)
+      return amountProductMovementById;
     } catch (error) {
       console.log(error)
     }

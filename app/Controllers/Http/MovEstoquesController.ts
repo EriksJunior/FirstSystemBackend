@@ -12,14 +12,7 @@ export default class MovEstoquesController {
     }
   }
 
-  public async selectMovInventoryById({ params }: HttpContextContract) {
-    try {
-      const stockMovementById = await MovEstoque.findOrFail(params.id)
-      return stockMovementById;
-    } catch (error) {
-      console.log(error)
-    }
-  }
+
 
   public async store({ request }: HttpContextContract) {
     try {
