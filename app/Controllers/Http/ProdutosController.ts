@@ -37,7 +37,8 @@ export default class ProdutosController {
   public async selectAmountProductById({ params, request }: HttpContextContract) {
     try {
       const amountProductMovementById = await Produto.findOrFail(params.id)
-      const amountTotalProduct = await Database.rawQuery(`select sum(mov_estoques.quantidade) as quantidadeTotal from mov_estoques inner join produtos where ${params.id}`)
+      const amountTotalProduct = await Database.rawQuery(`select sum(mov_estoques.quantidade) as quantidadeTotal from mov_estoques inner join produtos where ${amountProductMovementById}`)
+      console.log(amountTotalProduct);
       return amountProductMovementById;
     } catch (error) {
       console.log(error)

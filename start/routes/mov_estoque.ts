@@ -6,4 +6,5 @@ Route.put('/movestoque/:id', 'MovEstoquesController.update');
 Route.delete('/movestoque/:id', 'MovEstoquesController.destroy');
 
 
+
 export default Route
