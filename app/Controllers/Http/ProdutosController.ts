@@ -15,8 +15,10 @@ export default class ProdutosController {
   public async quantTotalProdEstoque({ params }: HttpContextContract) {
     try {
       const quantidadeTotalEstoque = await Produto.firstOrFail(params.id)
-      const data = await Produto.query; //INACABADO
-      return quantidadeTotalEstoque
+      const amountTotalProduct = await Database.rawQuery(`select sum(mov_estoques.quantidade) as quantidadeTotal from mov_estoques inner join produtos where ${quantidadeTotalEstoque}`)
+      const teste = quantidadeTotalEstoque.merge(amountTotalProduct)
+      console.log(teste)
+      return teste
     } catch (error) {
       console.log(error)
     }
@@ -28,18 +30,6 @@ export default class ProdutosController {
       const data = await Produto.create(dadosProdutos)
       response.status(200).json({ message: 'Produto salvo com sucesso!' })
       console.log(data)
-      return data
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  public async selectAmountProductById({ params, request }: HttpContextContract) {
-    try {
-      const amountProductMovementById = await Produto.findOrFail(params.id)
-      const amountTotalProduct = await Database.rawQuery(`select sum(mov_estoques.quantidade) as quantidadeTotal from mov_estoques inner join produtos where ${amountProductMovementById}`)
-      console.log(amountTotalProduct);
-      return amountProductMovementById;
     } catch (error) {
       console.log(error)
     }
@@ -47,6 +37,8 @@ export default class ProdutosController {
 
   public async show({ params }: HttpContextContract) {
     const dadosProdutos = await Produto.findOrFail(params.id)
+    const amountTotalProduct = await Database.rawQuery(`select sum(mov_estoques.quantidade) as quantidadeTotal from mov_estoques inner join produtos where ${params.id}`)
+    console.log(amountTotalProduct)
     return dadosProdutos
   }
 
