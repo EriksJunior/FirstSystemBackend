@@ -16,7 +16,7 @@ export default class ProdutosController {
     try {
       const quantidadeTotalEstoque = await Produto.firstOrFail(params.id)
       const amountTotalProduct = await Database.rawQuery(`select sum(mov_estoques.quantidade) as quantidadeTotal from mov_estoques inner join produtos where ${quantidadeTotalEstoque}`)
-      const teste = quantidadeTotalEstoque.merge(amountTotalProduct)
+      const teste = Object.assign({}, quantidadeTotalEstoque, amountTotalProduct)
       console.log(teste)
       return teste
     } catch (error) {
@@ -36,10 +36,11 @@ export default class ProdutosController {
   }
 
   public async show({ params }: HttpContextContract) {
-    const dadosProdutos = await Produto.findOrFail(params.id)
+    const quantidadeTotalEstoque = await Produto.firstOrFail(params.id)
     const amountTotalProduct = await Database.rawQuery(`select sum(mov_estoques.quantidade) as quantidadeTotal from mov_estoques inner join produtos where ${params.id}`)
-    console.log(amountTotalProduct)
-    return dadosProdutos
+    const teste = Object.assign({}, quantidadeTotalEstoque, amountTotalProduct)
+    console.log(teste)
+    return teste
   }
 
   public async update({ request, response, params }: HttpContextContract) {
