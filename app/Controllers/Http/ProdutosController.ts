@@ -12,13 +12,11 @@ export default class ProdutosController {
     }
   }
 
-  public async quantTotalProdEstoque({ params }: HttpContextContract) {
+  public async getStockProductById({ params }: HttpContextContract) {
     try {
-      const quantidadeTotalEstoque = await Produto.firstOrFail(params.id)
-      const amountTotalProduct = await Database.rawQuery(`select sum(mov_estoques.quantidade) as quantidadeTotal from mov_estoques inner join produtos where ${quantidadeTotalEstoque}`)
-      const teste = Object.assign({}, quantidadeTotalEstoque, amountTotalProduct)
-      console.log(teste)
-      return teste
+      const amountTotalProduct = await Database.rawQuery(`select sum(mov_estoques.quantidade) as quantidadeTotal from mov_estoques where mov_estoques.id_produto = ${params.id}`)
+      console.log(amountTotalProduct)
+      return amountTotalProduct
     } catch (error) {
       console.log(error)
     }
@@ -35,13 +33,12 @@ export default class ProdutosController {
     }
   }
 
-  public async show({ params }: HttpContextContract) {
-    const quantidadeTotalEstoque = await Produto.firstOrFail(params.id)
-    const amountTotalProduct = await Database.rawQuery(`select sum(mov_estoques.quantidade) as quantidadeTotal from mov_estoques inner join produtos where ${params.id}`)
-    const teste = Object.assign({}, quantidadeTotalEstoque, amountTotalProduct)
-    console.log(teste)
-    return teste
+  public async getProductById({ params }: HttpContextContract) {
+    const product = await Produto.find(params.id)
+    console.log(product)
+    return product
   }
+
 
   public async update({ request, response, params }: HttpContextContract) {
     try {
