@@ -13,6 +13,15 @@ export default class MovEstoquesController {
   }
 
 
+  public async getMovEstoqueById({ params }: HttpContextContract) {
+    try {
+      const data = await MovEstoque.findOrFail(params.id)
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
 
   public async store({ request }: HttpContextContract) {
     try {
@@ -27,11 +36,6 @@ export default class MovEstoquesController {
 
   }
 
-  public async show({ }: HttpContextContract) {
-  }
-
-  public async edit({ }: HttpContextContract) {
-  }
 
   public async update({ request, params, response }: HttpContextContract) {
     const dataMovEstoque = await MovEstoque.findOrFail(params.id)
