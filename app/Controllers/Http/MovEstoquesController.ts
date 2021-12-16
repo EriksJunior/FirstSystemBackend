@@ -17,6 +17,7 @@ export default class MovEstoquesController {
     try {
       const data = await MovEstoque.findOrFail(params.id)
       console.log(data)
+      return data
     } catch (error) {
       console.log(error)
     }
