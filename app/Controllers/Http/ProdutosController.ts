@@ -14,7 +14,7 @@ export default class ProdutosController {
 
   public async getStockProductById({ params }: HttpContextContract) {
     try {
-      const amountTotalProduct = await Database.rawQuery(`select sum(mov_estoques.quantidade) as quantidadeTotal from mov_estoques where mov_estoques.id_produto = ${params.id}`)
+      const amountTotalProduct = await Database.rawQuery(`select sum(mov_estoques.quantidade) as quantidadeTotal from mov_estoques where mov_estoques.id_produto = ${params.id} and mov_estoques.tipo_movimentacao = "Compra" or mov_estoques.tipo_movimentacao = "Ajuste Entrada" and mov_estoques.id_produto = ${params.id}`)
       console.log(amountTotalProduct)
       return amountTotalProduct
     } catch (error) {
