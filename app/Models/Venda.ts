@@ -1,9 +1,16 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, BelongsTo, belongsTo } from '@ioc:Adonis/Lucid/Orm'
+import Cliente from '../Models/Cliente'
+
 
 export default class Venda extends BaseModel {
   @column({ isPrimary: true })
-  public id_venda: number
+  public id: number
+
+  @column()
+  public id_cliente: number
+  @belongsTo(() => Cliente, { foreignKey: 'id_cliente' })
+  public cliente: BelongsTo<typeof Cliente>
 
   @column()
   public tipoVenda: string
