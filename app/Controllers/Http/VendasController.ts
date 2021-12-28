@@ -5,10 +5,14 @@ export default class VendasController {
   }
 
   public async store({ request }: HttpContextContract) {
-    const dadosVenda = await request.only(['id', 'tipoVenda', 'data_venda', 'data_entrega'])
-    const data = Venda.create(dadosVenda)
-    console.log(data)
-    return data
+    try {
+      const dadosVenda = await request.only(['id_cliente', 'tipo_venda', 'data_venda', 'data_entrega'])
+      const data = await Venda.create(dadosVenda)
+      console.log(data)
+      return data
+    } catch (error) {
+
+    }
   }
 
   public async show({ }: HttpContextContract) {

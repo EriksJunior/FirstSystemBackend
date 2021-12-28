@@ -7,7 +7,7 @@ export default class Vendas extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary().unique()
       table.integer('id_cliente').unsigned().references('id').inTable('clientes').onUpdate('CASCADE').notNullable()
-      table.string('tipoVenda', 50).defaultTo('venda').notNullable()
+      table.string('tipo_venda', 50).defaultTo('Venda').notNullable()
       table.date('data_venda').defaultTo(null)
       table.date('data_entrega').defaultTo(null)
       table.timestamps(true)
