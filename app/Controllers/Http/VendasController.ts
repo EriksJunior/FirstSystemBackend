@@ -5,7 +5,7 @@ export default class VendasController {
   }
 
   public async store({ request }: HttpContextContract) {
-    const dadosVenda = await request.only(['id_venda', 'tipoVenda', 'data_venda', 'data_entrega'])
+    const dadosVenda = await request.only(['id', 'tipoVenda', 'data_venda', 'data_entrega'])
     const data = Venda.create(dadosVenda)
     console.log(data)
     return data
