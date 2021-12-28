@@ -1,24 +1,25 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-
+import Venda from '../../Models/Venda'
 export default class VendasController {
-  public async index ({}: HttpContextContract) {
+  public async index({ }: HttpContextContract) {
   }
 
-  public async create ({}: HttpContextContract) {
+  public async store({ request }: HttpContextContract) {
+    const dadosVenda = await request.only(['id_venda', 'tipoVenda', 'data_venda', 'data_entrega'])
+    const data = Venda.create(dadosVenda)
+    console.log(data)
+    return data
   }
 
-  public async store ({}: HttpContextContract) {
+  public async show({ }: HttpContextContract) {
   }
 
-  public async show ({}: HttpContextContract) {
+  public async edit({ }: HttpContextContract) {
   }
 
-  public async edit ({}: HttpContextContract) {
+  public async update({ }: HttpContextContract) {
   }
 
-  public async update ({}: HttpContextContract) {
-  }
-
-  public async destroy ({}: HttpContextContract) {
+  public async destroy({ }: HttpContextContract) {
   }
 }
