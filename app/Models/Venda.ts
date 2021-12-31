@@ -13,7 +13,7 @@ export default class Venda extends BaseModel {
   public cliente: BelongsTo<typeof Cliente>
 
   @column()
-  public tipoVenda: string
+  public tipo_venda: string
 
   @column()
   public data_venda: DateTime

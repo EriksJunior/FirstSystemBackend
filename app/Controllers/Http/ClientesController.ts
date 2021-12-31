@@ -41,7 +41,7 @@ export default class ClientesController {
     try {
       const data = await Cliente.findOrFail(params.id)
       const cliente = await request.only(['nome', 'cpfcnpj', 'endereco', 'bairro', 'numero', 'cidade', 'uf', 'dataNasc', 'obs'])
-      data.merge(cliente)
+      await data.merge(cliente)
       await data.save()
       return data
 

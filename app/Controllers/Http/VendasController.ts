@@ -14,10 +14,9 @@ export default class VendasController {
 
   public async update({ params, request }: HttpContextContract) {
     const data = await Venda.findOrFail(params.id);
-    const dadosVendaUpdate = await request.only(['id_cliente', 'tipo_venda', 'data_venda', 'data_entrega']);
-    data.merge(dadosVendaUpdate);
-    await data.save
-    console.log(data)
+    const dadosVendaUpdate = await request.only(['id', 'id_cliente', 'tipo_venda', 'data_venda', 'data_entrega']);
+    await data.merge(dadosVendaUpdate);
+    await data.save()
     return data
   }
 
