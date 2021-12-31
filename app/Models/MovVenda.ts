@@ -17,6 +17,31 @@ export default class MovVenda extends BaseModel {
   @belongsTo(() => Venda, { foreignKey: 'id_venda' })
   public venda: BelongsTo<typeof Venda>
 
+  @column()
+  public quantidade: number
+
+  @column()
+  public valor: number
+
+  @column()
+  public unidade: string
+
+
+  @column()
+  public ipi: string
+
+
+  @column()
+  public pis: string
+
+
+  @column()
+  public cofins: string
+
+
+  @column()
+  public cst: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
