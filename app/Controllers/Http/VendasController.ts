@@ -5,14 +5,20 @@ export default class VendasController {
   }
 
   public async store({ request }: HttpContextContract) {
-    try {
-      const dadosVenda = await request.only(['id_cliente', 'tipo_venda', 'data_venda', 'data_entrega'])
-      const data = await Venda.create(dadosVenda)
-      console.log(data)
-      return data
-    } catch (error) {
+    const dadosVenda = await request.only(['id_cliente', 'tipo_venda', 'data_venda', 'data_entrega'])
+    const data = await Venda.create(dadosVenda)
+    console.log(data)
+    return data
 
-    }
+  }
+
+  public async update({ params, request }: HttpContextContract) {
+    const data = await Venda.findOrFail(params.id);
+    const dadosVendaUpdate = await request.only(['id_cliente', 'tipo_venda', 'data_venda', 'data_entrega']);
+    data.merge(dadosVendaUpdate);
+    await data.save
+    console.log(data)
+    return data
   }
 
   public async show({ }: HttpContextContract) {
@@ -21,8 +27,6 @@ export default class VendasController {
   public async edit({ }: HttpContextContract) {
   }
 
-  public async update({ }: HttpContextContract) {
-  }
 
   public async destroy({ }: HttpContextContract) {
   }

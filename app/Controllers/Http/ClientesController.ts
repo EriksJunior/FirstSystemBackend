@@ -25,7 +25,7 @@ export default class ClientesController {
 
   public async store({ request }: HttpContextContract) {
     try {
-      const data = request.only(['nome', 'cpfcnpj', 'endereco', 'bairro', 'numero', 'cidade', 'uf', 'dataNasc', 'data_nasc', 'obs'])
+      const data = await request.only(['nome', 'cpfcnpj', 'endereco', 'bairro', 'numero', 'cidade', 'uf', 'dataNasc', 'data_nasc', 'obs'])
       const cliente = await Cliente.create(data)
       console.log(data)
       return cliente
@@ -40,7 +40,7 @@ export default class ClientesController {
   public async update({ request, params }: HttpContextContract) {
     try {
       const data = await Cliente.findOrFail(params.id)
-      const cliente = request.only(['nome', 'cpfcnpj', 'endereco', 'bairro', 'numero', 'cidade', 'uf', 'dataNasc', 'obs'])
+      const cliente = await request.only(['nome', 'cpfcnpj', 'endereco', 'bairro', 'numero', 'cidade', 'uf', 'dataNasc', 'obs'])
       data.merge(cliente)
       await data.save()
       return data
