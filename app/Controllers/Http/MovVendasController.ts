@@ -1,5 +1,5 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import MovEstoque from '../../Models/MovVenda'
+import MovVenda from '../../Models/MovVenda'
 
 export default class MovVendasController {
   public async index({ }: HttpContextContract) {
@@ -9,10 +9,9 @@ export default class MovVendasController {
   }
 
   public async store({ request }: HttpContextContract) {
-
     const dadosMovVendas = await request.only(['id_venda', 'id_produto', 'quantidade', 'valor', 'unidade'])
-    const data = MovEstoque.create(dadosMovVendas)
-    console.log(data)
+    console.log(dadosMovVendas)
+    const data = await MovVenda.create(dadosMovVendas)
     return data
   }
 
