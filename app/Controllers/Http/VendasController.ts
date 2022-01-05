@@ -2,6 +2,9 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Venda from '../../Models/Venda'
 export default class VendasController {
   public async index({ }: HttpContextContract) {
+    const data = await Venda.query().preload("cliente");
+    console.log(data)
+    return data
   }
 
   public async store({ request }: HttpContextContract) {
