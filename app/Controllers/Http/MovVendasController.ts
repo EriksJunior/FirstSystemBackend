@@ -49,6 +49,8 @@ export default class MovVendasController {
   public async update({ }: HttpContextContract) {
   }
 
-  public async destroy({ }: HttpContextContract) {
+  public async destroy({ params }: HttpContextContract) {
+    const idProductDelete = await MovVenda.findOrFail(params.id)
+    idProductDelete.delete();
   }
 }
