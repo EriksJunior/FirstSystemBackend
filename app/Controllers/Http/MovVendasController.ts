@@ -24,6 +24,7 @@ export default class MovVendasController {
     }
   }
 
+
   public async getSalesById({ params }: HttpContextContract) {
     const dataSalesById = await MovVenda.findOrFail(params.id)
     console.log(dataSalesById)
