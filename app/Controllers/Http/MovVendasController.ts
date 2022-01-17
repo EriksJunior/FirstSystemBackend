@@ -24,6 +24,17 @@ export default class MovVendasController {
     }
   }
 
+  public async getProductById({ params }: HttpContextContract) {
+    try {
+      const dataProductById = await Database.rawQuery(`select produtos.id, produtos.nome, mov_vendas.id, mov_vendas.id_venda, mov_vendas.id_produto, mov_vendas.quantidade, mov_vendas.valor, mov_vendas.unidade from mov_vendas inner Join  produtos on mov_vendas.id_produto = produtos.id where  mov_vendas.id = ${params.id}`)
+      console.log(dataProductById)
+      return dataProductById
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
   public async getSalesById({ params }: HttpContextContract) {
     const dataSalesById = await MovVenda.findOrFail(params.id)
