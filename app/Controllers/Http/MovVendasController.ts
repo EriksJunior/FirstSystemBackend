@@ -58,7 +58,18 @@ export default class MovVendasController {
   public async edit({ }: HttpContextContract) {
   }
 
-  public async update({ }: HttpContextContract) {
+  public async update({ request, params }: HttpContextContract) {
+    try {
+      const data = await MovVenda.findOrFail(params.id)
+      const dadosProdutoVenda = await request.only(['id_venda', 'quantidade', 'valor', 'unidade', 'id_produto'])
+      await data.merge(dadosProdutoVenda)
+      await data.save()
+      return data
+
+    } catch (error) {
+      console.log(error)
+    }
+
   }
 
   public async destroy({ params }: HttpContextContract) {
