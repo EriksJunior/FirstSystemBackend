@@ -23,6 +23,13 @@ export default class VendasController {
     return data
   }
 
+  public async getSaleByTableForFormSale({ params }: HttpContextContract) {
+    const dataSaleTable = await Venda.findOrFail(params.id)
+    console.log(dataSaleTable)
+    return dataSaleTable;
+  }
+
+
   public async show({ }: HttpContextContract) {
   }
 

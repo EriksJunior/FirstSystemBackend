@@ -34,13 +34,17 @@ export default class MovVendasController {
       console.log(error)
     }
   }
-
+  // SELECT * FROM mov_vendas inner join vendas on mov_vendas.id_venda = vendas.id where mov_vendas.id_venda = 97
 
   public async getSalesById({ params }: HttpContextContract) {
     const dataSalesById = await MovVenda.findOrFail(params.id)
     console.log(dataSalesById)
     return dataSalesById
   }
+
+
+
+
 
   public async create({ }: HttpContextContract) {
   }
